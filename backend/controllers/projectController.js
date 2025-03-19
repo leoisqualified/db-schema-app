@@ -1,7 +1,10 @@
 import Project from "../models/Project.js";
-import OpenAI from "openai";
+import { GoogleGenerativeAI } from "@google/generative-ai";
+import dotenv from "dotenv";
 
-const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
+dotenv.config();
+
+const genAI = new GoogleGenerativeAI(process.env.GOOGLE_GEMINI_API_KEY);
 
 // 📌 Generate a new project with AI-generated schema
 export const createProject = async (req, res) => {
@@ -14,23 +17,45 @@ export const createProject = async (req, res) => {
         .json({ error: "Title and schema type are required." });
     }
 
-    // Define the AI prompt
+    // Define AI prompt with explicit instruction to avoid Markdown formatting
     const aiPrompt =
       schemaType === "SQL"
-        ? `Generate a SQL schema for a ${title} database. Include table names, columns, data types, and relationships in JSON format.`
-        : `Generate a NoSQL schema for a ${title} database. Represent it as MongoDB collections with sample fields and data types in JSON format.`;
+        ? `Generate a SQL schema for a ${title} database. Output only the schema as a JSON object, with table names as keys and an array of column objects { "name": column_name, "type": data_type }. Do not include explanations, only return the JSON. Do not wrap the response in markdown like \`\`\`json.`
+        : `Generate a NoSQL schema for a ${title} database in MongoDB format. Output only the schema as a JSON object, where each collection is a key and contains an array of field objects { "name": field_name, "type": data_type }. Do not include explanations, only return the JSON. Do not wrap the response in markdown like \`\`\`json.`;
 
-    // Call OpenAI API
-    const aiResponse = await openai.chat.completions.create({
-      model: "gpt-4",
-      messages: [{ role: "user", content: aiPrompt }],
+    // Call Google's Gemini API
+    const model = genAI.getGenerativeModel({ model: "gemini-2.0-flash" });
+    const aiResponse = await model.generateContent({
+      contents: [{ parts: [{ text: aiPrompt }] }],
     });
 
-    // Extract and validate AI-generated schema
+    // Log the raw AI response before parsing
+    console.log("Raw AI Response:", JSON.stringify(aiResponse, null, 2));
+
+    // Extract AI response safely
+    const candidate = aiResponse.response?.candidates?.[0];
+
+    if (!candidate || !candidate.content?.parts?.[0]?.text) {
+      console.error("Unexpected AI response format:", aiResponse);
+      return res
+        .status(500)
+        .json({ error: "Invalid schema format received from AI." });
+    }
+
+    // Extract AI-generated text and clean it
+    let aiGeneratedText = candidate.content.parts[0].text.trim();
+
+    // Remove Markdown formatting if AI still adds it
+    aiGeneratedText = aiGeneratedText
+      .replace(/^```json/, "")
+      .replace(/```$/, "")
+      .trim();
+
     let schemaDefinition;
     try {
-      schemaDefinition = JSON.parse(aiResponse.choices[0].message.content);
+      schemaDefinition = JSON.parse(aiGeneratedText); // Ensure valid JSON
     } catch (error) {
+      console.error("Failed to parse AI response text:", aiGeneratedText);
       return res
         .status(500)
         .json({ error: "Invalid schema format received from AI." });
@@ -63,16 +88,29 @@ export const getProject = async (req, res) => {
 // 📌 Update an existing project
 export const updateProject = async (req, res) => {
   try {
-    const updatedProject = await Project.findByIdAndUpdate(
-      req.params.id,
-      req.body,
-      { new: true }
-    );
-    if (!updatedProject) {
-      return res.status(404).json({ error: "Project not found" });
-    }
-    res.json(updatedProject);
+    const { prompt } = req.body;
+    const project = await Project.findById(req.params.id);
+
+    // AI generates a new schema based on updated prompt
+    const aiResponse = await openai.chat.completions.create({
+      model: "gpt-4",
+      messages: [{ role: "user", content: `Modify this schema: ${prompt}` }],
+    });
+
+    const updatedSchema = JSON.parse(aiResponse.choices[0].message.content);
+
+    // Update project with new schema & keep history
+    project.history.push({ role: "user", content: prompt });
+    project.history.push({
+      role: "ai",
+      content: "Schema updated successfully.",
+    });
+
+    project.schemaDefinition = updatedSchema;
+    await project.save();
+
+    res.json({ schemaDefinition: updatedSchema, history: project.history });
   } catch (error) {
-    res.status(500).json({ error: "Error updating project" });
+    res.status(500).json({ error: "Error updating schema" });
   }
 };

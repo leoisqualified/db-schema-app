@@ -1,18 +1,23 @@
 import express from "express";
 import cors from "cors";
-import connectDB from "./config/db";
+import dotenv from "dotenv";
+import projectRoutes from "./routes/projectRoutes.js";
+import connectDB from "./config/db.js";
 
-dotenv.config();
+dotenv.config(); // To load environment variables
 
+// Instantiate express
 const app = express();
 
+const PORT = process.env.PORT;
+
 app.use(cors());
-app.use(express.json());
+app.use(express.json()); // express middleware to parse body requests
 
 // Database Connection
 connectDB();
 
 // Routes
-app.get("/", (req, res) => res.send("API is running..."));
-const PORT = process.env.PORT || 5000;
+app.use("/api", projectRoutes);
+
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
