@@ -9,15 +9,27 @@ function HomePage() {
   const navigate = useNavigate();
 
   const handleSubmit = async () => {
-    if (!prompt) return alert("Please enter a prompt.");
+    if (!prompt.trim()) return alert("Please enter a valid prompt.");
 
     try {
-      const response = await axios.post("http://localhost:5000/api/generate", {
-        prompt,
+      const schemaType = "SQL"; // Change this later if user selects between SQL/NoSQL
+
+      const response = await axios.post("http://localhost:5000/api/new", {
+        title: prompt.trim(),
+        schemaType,
       });
-      navigate(`/project/${response.data.id}`);
+
+      if (response.status === 201) {
+        setPrompt(""); // Clears the textarea only if the request is successful
+        navigate(`/project/${response.data.id}`, {
+          state: { title: prompt.trim() },
+        });
+      } else {
+        alert("Unexpected response from the server.");
+      }
     } catch (error) {
-      alert("Error generating schema.");
+      console.error("Error generating schema:", error.response?.data || error);
+      alert(error.response?.data?.error || "Error generating schema.");
     }
   };
 
@@ -26,7 +38,9 @@ function HomePage() {
       <Navbar />
       <div className="container">
         <div className="welcome-box">
-          <h1>Welcome, user!</h1>
+          <h1>
+            Welcome, <span className="highlight">User.</span>
+          </h1>
           <p>What are we building today?</p>
         </div>
 
@@ -34,7 +48,7 @@ function HomePage() {
           <textarea
             value={prompt}
             onChange={(e) => setPrompt(e.target.value)}
-            placeholder="Describe your database schema..."
+            placeholder="Ask Anything"
           />
           <button onClick={handleSubmit}>Send</button>
         </div>

@@ -18,34 +18,25 @@ body {
   padding: 20px;
 }
 
-/* Navbar */
-.navbar {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 15px;
-  background-color: transparent;
-}
-
-.navbar h2 {
-  font-size: 24px;
-  font-weight: bold;
-}
-
 /* Welcome Box */
 .welcome-box {
   margin-top: 50px;
 }
 
 .welcome-box h1 {
-  font-size: 28px;
+  font-size: 23px;
   color: #000;
+  font-weight: 100;
+}
+
+.welcome-box h1 .highlight {
+  font-style: italic;
 }
 
 .welcome-box p {
-  font-size: 18px;
+  font-size: 28px;
   color: #777;
-  margin-top: 5px;
+  margin-top: 1px;
 }
 
 /* Input Container */
