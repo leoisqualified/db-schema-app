@@ -1,0 +1,37 @@
+/* Navbar Container */
+.navbar {
+  width: 97%;
+  position: fixed;
+  height: 40px;
+  top: 0;
+  left: 0;
+  background-color: white; /* Ensures it stands out */
+  padding: 15px 20px;
+  display: flex;
+  border-bottom: 1px solid #ccc;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 1000; /* Ensures it's above other elements */
+}
+
+/* Logo Styling */
+.logo {
+  font-size: 24px;
+  font-weight: bold;
+  color: #000;
+}
+
+/* User Avatar */
+.user-avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: url("../assets/avatar.avif") center/center cover; /* Placeholder, replace with actual image */
+}
+
+/* Responsive Design */
+@media (max-width: 600px) {
+  .navbar {
+    padding: 10px 15px;
+  }
+}

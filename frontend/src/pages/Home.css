@@ -1,0 +1,107 @@
+/* General Page Styles */
+body {
+  background-color: #ffffff;
+  font-family: "Arial", sans-serif;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+/* Container */
+.container {
+  width: 90%;
+  max-width: 600px;
+  text-align: center;
+  padding: 20px;
+}
+
+/* Navbar */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px;
+  background-color: transparent;
+}
+
+.navbar h2 {
+  font-size: 24px;
+  font-weight: bold;
+}
+
+/* Welcome Box */
+.welcome-box {
+  margin-top: 50px;
+}
+
+.welcome-box h1 {
+  font-size: 28px;
+  color: #000;
+}
+
+.welcome-box p {
+  font-size: 18px;
+  color: #777;
+  margin-top: 5px;
+}
+
+/* Input Container */
+.input-container {
+  display: flex;
+  align-items: center;
+  position: absolute;
+  bottom: 20px;
+  right: 300px;
+  border: 1px solid #ccc;
+  border-radius: 20px;
+  padding: 10px;
+  background: #fff;
+  width: 50%;
+  height: 50px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.input-container textarea {
+  flex: 1;
+  border: none;
+  outline: none;
+  font-size: 16px;
+  color: #000;
+  padding: 10px;
+  resize: none;
+  height: 50px;
+  background: transparent;
+}
+
+.input-container textarea::placeholder {
+  color: #aaa;
+}
+
+/* Send Button */
+.input-container button {
+  width: 50px;
+  height: 50px;
+  background-color: black;
+  border: none;
+  border-radius: 50%;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.input-container button:hover {
+  background-color: #333;
+}
+
+/* Responsive Design */
+@media (max-width: 600px) {
+  .container {
+    width: 95%;
+  }
+}
