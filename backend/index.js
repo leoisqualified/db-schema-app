@@ -18,6 +18,6 @@ app.use(express.json()); // express middleware to parse body requests
 connectDB();
 
 // Routes
-app.use("/api", projectRoutes);
+app.use("/api/projects", projectRoutes);
 
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));

@@ -20,8 +20,8 @@ export const createProject = async (req, res) => {
     // Define AI prompt with explicit instruction to avoid Markdown formatting
     const aiPrompt =
       schemaType === "SQL"
-        ? `Generate a SQL schema for a ${title} database. Output only the schema as a JSON object, with table names as keys and an array of column objects { "name": column_name, "type": data_type }. Do not include explanations, only return the JSON. Do not wrap the response in markdown like \`\`\`json.`
-        : `Generate a NoSQL schema for a ${title} database in MongoDB format. Output only the schema as a JSON object, where each collection is a key and contains an array of field objects { "name": field_name, "type": data_type }. Do not include explanations, only return the JSON. Do not wrap the response in markdown like \`\`\`json.`;
+        ? `Generate a SQL schema for a ${title} database. Output ONLY a raw JSON object. Do NOT wrap in markdown (no triple backticks). Do NOT add any explanations.`
+        : `Generate a NoSQL schema for a ${title} database in MongoDB format. Output ONLY a raw JSON object. Do NOT wrap in markdown (no triple backticks). Do NOT add any explanations.`;
 
     // Call Google's Gemini API
     const model = genAI.getGenerativeModel({ model: "gemini-2.0-flash" });
