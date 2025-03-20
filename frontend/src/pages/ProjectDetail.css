@@ -1,7 +1,16 @@
-/* Schema Container (Row Layout with Wrapping) */
+/* Project Container (Prevents Overflow) */
 .project-container {
-  overflow-y: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  max-height: 90vh; /* Prevents excessive height */
+  overflow: hidden; /* Ensures no content spills out */
+  padding: 20px;
+  box-sizing: border-box;
 }
+
+/* Schema Container (Scrollable When Overflowing) */
 .schema-container {
   display: flex;
   flex-wrap: wrap;
@@ -13,22 +22,35 @@
   border-radius: 10px;
   text-align: left;
   overflow-y: auto;
-  max-height: 400px; /* Keeps it scrollable */
-  margin-bottom: 100px;
+  max-height: 600px; /* Keeps it scrollable */
+  width: 90vw; /* Makes it as wide as the viewport */
+  box-sizing: border-box;
+  margin-top: -100px;
 }
 
-/* Smaller Schema Tables */
+/* Hide Scrollbar (But Keep Scrolling Functional) */
+.schema-container::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+  display: none;
+}
+
+.schema-container {
+  scrollbar-width: none; /* For Firefox */
+  -ms-overflow-style: none; /* For Internet Explorer and Edge */
+}
+
+/* Schema Table Styling */
 .schema-table {
   flex: 1 1 calc(33% - 20px); /* Allows 3 tables per row */
   min-width: 250px; /* Ensures proper spacing */
   max-width: 280px; /* Prevents oversized tables */
-  background: #f9f9f9;
   padding: 10px;
   border-radius: 8px;
-  /* box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1); */
+  overflow: hidden; /* Prevents table content from overflowing */
 }
 
-/* Header Styling */
+/* Ensures Table Text is Readable */
 .schema-table h3 {
   color: black;
   font-weight: bold;
@@ -37,11 +59,10 @@
   margin-bottom: 5px;
 }
 
-/* Table Styling */
 .schema-table table {
   width: 100%;
   border-collapse: collapse;
-  font-size: 12px; /* Smaller text for compact tables */
+  font-size: 12px;
 }
 
 .schema-table th,
@@ -50,12 +71,93 @@
   padding: 5px;
   text-align: left;
   color: black;
+  white-space: nowrap; /* Prevents text wrapping in columns */
+  overflow: hidden;
+  text-overflow: ellipsis; /* Trims long text with "..." */
 }
 
 .schema-table th {
   background-color: #333;
   color: white;
   font-size: 12px;
+}
+
+/* Scrollable Chat History */
+/* ✅ Chat History Container */
+.chat-history {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  max-height: 200px; /* Limits height */
+  overflow-y: auto; /* Scrollable if needed */
+  padding: 15px;
+  background: #f5f5f5;
+  border-radius: 10px;
+  margin-bottom: 20px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* ✅ Hide Scrollbar While Keeping Scrolling Functional */
+.chat-history::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+  display: none;
+}
+
+.chat-history {
+  scrollbar-width: none; /* For Firefox */
+  -ms-overflow-style: none; /* For IE & Edge */
+}
+
+/* ✅ User Bubble (Pushes Right) */
+.user-bubble {
+  align-self: flex-end; /* Aligns user messages to the right */
+  background-color: #e1e1e1;
+  color: black;
+  padding: 10px 15px;
+  border-radius: 15px;
+  width: 70%;
+  min-height: 30px;
+  word-wrap: break-word;
+  display: inline-block; /* Ensures proper wrapping */
+}
+
+/* ✅ AI Bubble (Pushes Left) */
+.ai-bubble {
+  align-self: flex-start; /* Aligns AI messages to the left */
+  background-color: white;
+  color: black;
+  padding: 10px 15px;
+  border-radius: 15px;
+  max-width: 70%;
+  word-wrap: break-word;
+  display: inline-block; /* Ensures proper wrapping */
+}
+
+/* ✅ Responsive Adjustments */
+@media (max-width: 600px) {
+  .chat-history {
+    max-height: 150px;
+    padding: 10px;
+  }
+  .user-bubble,
+  .ai-bubble {
+    max-width: 80%;
+  }
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+  .schema-table {
+    flex: 1 1 calc(50% - 10px); /* Two tables per row on smaller screens */
+  }
+}
+
+@media (max-width: 480px) {
+  .schema-table {
+    flex: 1 1 100%; /* One table per row on very small screens */
+  }
 }
 
 /* Update Button */
@@ -76,17 +178,4 @@
 /* Ensures the FontAwesome icon inside the button is white */
 .update-button svg {
   color: white !important;
-}
-
-/* Responsive Adjustments */
-@media (max-width: 768px) {
-  .schema-table {
-    flex: 1 1 calc(50% - 10px); /* Two tables per row on smaller screens */
-  }
-}
-
-@media (max-width: 480px) {
-  .schema-table {
-    flex: 1 1 100%; /* One table per row on very small screens */
-  }
 }

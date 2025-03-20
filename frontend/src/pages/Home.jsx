@@ -11,20 +11,30 @@ function HomePage() {
   const navigate = useNavigate();
 
   const handleSubmit = async () => {
-    if (!prompt.trim()) return alert("Please enter a valid prompt.");
+    if (!prompt.trim()) {
+      alert("Please enter a valid prompt.");
+      return;
+    }
 
     try {
-      const schemaType = "SQL"; // Change this later if user selects between SQL/NoSQL
+      // ✅ Generate a simple title (First 3 words of the prompt)
+      const generatedTitle = prompt.trim().split(" ").slice(0, 3).join(" ");
 
-      const response = await axios.post("http://localhost:5000/api/new", {
-        title: prompt.trim(),
-        schemaType,
-      });
+      const response = await axios.post(
+        "http://localhost:5000/api/projects/new",
+        {
+          prompt: prompt.trim(), // ✅ Send prompt to the backend
+          title: generatedTitle, // ✅ Send title
+        }
+      );
 
       if (response.status === 201) {
-        setPrompt(""); // Clears the textarea only if the request is successful
+        setPrompt(""); // ✅ Clears the textarea only if the request is successful
         navigate(`/project/${response.data.id}`, {
-          state: { title: prompt.trim() },
+          state: {
+            prompt: prompt.trim(), // ✅ Send prompt to the project page
+            title: generatedTitle, // ✅ Send title for Navbar
+          },
         });
       } else {
         alert("Unexpected response from the server.");
@@ -50,7 +60,7 @@ function HomePage() {
           <textarea
             value={prompt}
             onChange={(e) => setPrompt(e.target.value)}
-            placeholder="Ask Anything"
+            placeholder="Say Anything"
           />
           <button onClick={handleSubmit} className="send-button">
             <FontAwesomeIcon icon={faArrowUp} />

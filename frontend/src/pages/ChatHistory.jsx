@@ -1,27 +1,37 @@
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 import "./ChatHistory.css";
 import Navbar from "../components/Navbar";
 
 function ChatHistory() {
   const navigate = useNavigate();
+  const [chatHistory, setChatHistory] = useState([]);
 
-  // Sample chat history (Replace with real data from backend)
-  const chatHistory = [
-    { id: "67dab3edd05af7bbd530dfb6", title: "Create User Schema" },
-    { id: "67dac8fed05af7bbd530dfb8", title: "Create a User Model" },
-  ];
+  useEffect(() => {
+    axios
+      .get("http://localhost:5000/api/projects") // Fetch all projects
+      .then((response) => setChatHistory(response.data))
+      .catch((error) => console.error("Error fetching chat history:", error));
+  }, []);
 
   return (
     <>
       <Navbar />
       <div className="chat-history-container">
-        <h1>Chat History</h1>
         <ul>
-          {chatHistory.map((chat) => (
-            <li key={chat.id} onClick={() => navigate(`/project/${chat.id}`)}>
-              {chat.title}
-            </li>
-          ))}
+          {chatHistory.length > 0 ? (
+            chatHistory.map((chat) => (
+              <li
+                key={chat._id}
+                onClick={() => navigate(`/project/${chat._id}`)}
+              >
+                {chat.title}
+              </li>
+            ))
+          ) : (
+            <p>No chat history found.</p>
+          )}
         </ul>
 
         {/* New Project Button */}

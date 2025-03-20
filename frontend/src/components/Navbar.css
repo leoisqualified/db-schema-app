@@ -28,7 +28,11 @@
   left: 50%;
   transform: translateX(-50%);
   font-size: 18px;
-  font-weight: bold;
+  font-weight: 100;
+}
+
+.nav-title::first-letter {
+  text-transform: uppercase;
 }
 
 .menu-icon {
