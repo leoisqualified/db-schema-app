@@ -24,18 +24,29 @@
 /* Nav Title */
 .nav-title {
   position: absolute;
+  color: black;
   left: 50%;
   transform: translateX(-50%);
   font-size: 18px;
   font-weight: bold;
 }
 
+.hamburger-icon {
+  color: black;
+  margin-left: 1140px;
+}
+
+.hamburger-icon:hover {
+  cursor: pointer;
+}
 /* User Avatar */
 .user-avatar {
   width: 40px;
   height: 40px;
   border-radius: 50%;
-  background-image: url("../assets/avatar.avif") center/center cover; /* Placeholder, replace with actual image */
+  object-fit: cover; /* Ensures the image fills the space properly */
+  display: block; /* Removes any inline spacing issues */
+  margin-right: 30px;
 }
 
 /* Responsive Design */

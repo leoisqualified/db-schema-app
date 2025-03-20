@@ -3,6 +3,7 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import "./Home.css";
 import Navbar from "../components/Navbar";
+import { FaArrowUp } from "react-icons/fa";
 
 function HomePage() {
   const [prompt, setPrompt] = useState("");
@@ -50,7 +51,9 @@ function HomePage() {
             onChange={(e) => setPrompt(e.target.value)}
             placeholder="Ask Anything"
           />
-          <button onClick={handleSubmit}>Send</button>
+          <button onClick={handleSubmit} className="send-button">
+            <FaArrowUp color="white" />
+          </button>
         </div>
       </div>
     </>

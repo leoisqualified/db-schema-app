@@ -7,19 +7,15 @@ import "./ProjectDetail.css";
 function ProjectDetail() {
   const { id: rawId } = useParams();
   const id = rawId.split(":")[0]; // ✅ Ensure ID is correct
-  console.log("Extracted ID from URL:", id);
   const location = useLocation();
-  console.log("Current Route:", location.pathname);
   const [schema, setSchema] = useState(null);
   const [updatePrompt, setUpdatePrompt] = useState("");
   const [history, setHistory] = useState([]);
 
   useEffect(() => {
-    // Fetch the schema and history
     axios
       .get(`http://localhost:5000/api/projects/${id}`)
       .then((response) => {
-        console.log("Fetched Schema:", response.data.schemaDefinition);
         setSchema(
           response.data.schemaDefinition || {
             test_table: [{ name: "id", type: "INT PRIMARY KEY" }],
@@ -53,8 +49,8 @@ function ProjectDetail() {
       <div className="project-container">
         <h1>{location.state?.title || "Project Schema"}</h1>
 
-        {/* Schema Display */}
-        <div className="schema-box">
+        {/* Schema Display (Scrollable) */}
+        <div className="schema-container">
           {schema && Object.keys(schema).length > 0 ? (
             Object.entries(schema).map(([tableName, columns]) => (
               <div key={tableName} className="schema-table">
@@ -94,7 +90,7 @@ function ProjectDetail() {
           ))}
         </div>
 
-        {/* Update Input */}
+        {/* Update Input (Static) */}
         <div className="input-container">
           <textarea
             value={updatePrompt}

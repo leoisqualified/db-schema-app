@@ -24,7 +24,7 @@ body {
 }
 
 .welcome-box h1 {
-  font-size: 23px;
+  font-size: 28px;
   color: #000;
   font-weight: 100;
 }
@@ -35,8 +35,9 @@ body {
 
 .welcome-box p {
   font-size: 28px;
+  font-weight: 100;
   color: #777;
-  margin-top: 1px;
+  margin-top: -20px;
 }
 
 /* Input Container */
@@ -63,16 +64,17 @@ body {
   color: #000;
   padding: 10px;
   resize: none;
-  height: 50px;
+  height: 20px;
   background: transparent;
 }
 
 .input-container textarea::placeholder {
   color: #aaa;
+  margin-bottom: -10px;
 }
 
 /* Send Button */
-.input-container button {
+.send-button {
   width: 50px;
   height: 50px;
   background-color: black;
@@ -83,7 +85,11 @@ body {
   justify-content: center;
   align-items: center;
   cursor: pointer;
-  font-size: 16px;
+  font-size: 24px; /* Adjust the icon size */
+}
+
+.send-button:hover {
+  background-color: #333;
 }
 
 .input-container button:hover {

@@ -1,124 +1,70 @@
-.project-container {
-  width: 90%;
-  max-width: 800px;
-  margin: auto;
-  padding: 20px;
-  text-align: center;
-}
-
-/* Chat History */
-.chat-history {
+/* Schema Container (Row Layout with Wrapping) */
+.schema-container {
   display: flex;
-  flex-direction: column;
-  gap: 10px;
-  margin-bottom: 20px;
-}
-
-.user-bubble {
-  background: #f0f0f0;
-  padding: 10px;
-  border-radius: 15px;
-  align-self: flex-start;
-  width: fit-content;
-}
-
-.ai-bubble {
-  background: transparent;
-  border: 1px solid #ddd;
-  padding: 10px;
-  border-radius: 15px;
-  align-self: flex-end;
-  width: fit-content;
-}
-
-/* Schema Tables */
-.schema-box {
+  flex-wrap: wrap;
+  gap: 15px;
+  justify-content: flex-start;
+  align-items: flex-start;
   background: #fff;
-  padding: 20px;
+  padding: 15px;
   border-radius: 10px;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
   text-align: left;
-  white-space: pre-wrap;
-  overflow-x: auto;
-  color: black;
+  overflow-y: auto;
+  max-height: 400px; /* Keeps it scrollable */
+  margin-bottom: 150px;
 }
 
+/* Smaller Schema Tables */
 .schema-table {
-  margin-bottom: 20px;
+  flex: 1 1 calc(33% - 20px); /* Allows 3 tables per row */
+  min-width: 250px; /* Ensures proper spacing */
+  max-width: 280px; /* Prevents oversized tables */
+  background: #f9f9f9;
+  padding: 10px;
+  border-radius: 8px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
 }
 
+/* Header Styling */
 .schema-table h3 {
-  margin-bottom: 10px;
   color: black;
-  font-weight: 100;
+  font-weight: bold;
+  font-size: 14px;
+  text-align: center;
+  margin-bottom: 5px;
 }
 
+/* Table Styling */
 .schema-table table {
   width: 100%;
   border-collapse: collapse;
-  border: 1px solid #ddd;
+  font-size: 12px; /* Smaller text for compact tables */
 }
 
 .schema-table th,
 .schema-table td {
   border: 1px solid #ddd;
-  padding: 8px;
+  padding: 5px;
   text-align: left;
+  color: black;
 }
 
 .schema-table th {
   background-color: #333;
-  color: white; /* Fix text visibility */
-}
-
-/* Debugging Borders */
-.schema-box,
-.schema-table table {
-  border: 2px solid red; /* Temporary debug */
-}
-
-/* Input */
-.input-container {
-  display: flex;
-  align-items: center;
-  position: absolute;
-  bottom: 20px;
-  right: 300px;
-  border: 1px solid #ccc;
-  border-radius: 20px;
-  padding: 10px;
-  background: #fff;
-  width: 50%;
-  height: 50px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-}
-
-.input-container textarea {
-  flex: 1;
-  border: none;
-  outline: none;
-  font-size: 16px;
-  padding: 10px;
-  resize: none;
-  height: 50px;
-  background: transparent;
-  width: 100%;
-}
-
-.input-container button {
-  width: 80px;
-  height: 50px;
-  background-color: black;
-  border: none;
-  border-radius: 50px;
   color: white;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  cursor: pointer;
-  font-size: 16px;
+  font-size: 12px;
 }
 
-.input-container button:hover {
-  background-color: #333;
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+  .schema-table {
+    flex: 1 1 calc(50% - 10px); /* Two tables per row on smaller screens */
+  }
+}
+
+@media (max-width: 480px) {
+  .schema-table {
+    flex: 1 1 100%; /* One table per row on very small screens */
+  }
 }
