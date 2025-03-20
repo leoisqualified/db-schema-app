@@ -14,6 +14,20 @@
   z-index: 1000; /* Ensures it's above other elements */
 }
 
+/* Logo Container */
+.logo-container {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  text-decoration: none;
+}
+
+/* Static Black Star Icon */
+.static-star {
+  color: black;
+  font-size: 18px;
+}
+
 /* Logo Styling */
 .logo {
   font-size: 18px;
@@ -37,7 +51,7 @@
 
 .menu-icon {
   color: black;
-  margin-left: 1140px;
+  margin-left: 1130px;
 }
 
 .menu-icon:hover {

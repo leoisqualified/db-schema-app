@@ -42,30 +42,38 @@ function ProjectDetail() {
   const handleUpdate = async () => {
     if (!updatePrompt.trim()) return alert("Please enter a prompt.");
 
-    // ✅ 1. Add user's message
-    const newHistory = [{ role: "user", content: updatePrompt }];
-
     try {
+      const cleanId = id.split(":")[0]; // ✅ Remove any unwanted characters from the ID
+      console.log("Updating project with ID:", cleanId); // Debugging log
+
+      // ✅ Send the update request to the correct endpoint
       const response = await axios.put(
-        `http://localhost:5000/api/projects/${id}`,
+        `http://localhost:5000/api/projects/${cleanId}/update`, // ✅ Correct endpoint
         { prompt: updatePrompt.trim() }
       );
 
-      // ✅ 2. Update schema
+      console.log("Update successful:", response.data); // Debugging log
+
+      // ✅ Update the schema with the AI's response
       setSchema(response.data.schemaDefinition);
 
-      // ✅ 3. AI's response (Schema + Confirmation)
+      // ✅ Append user message
+      const newHistory = [{ role: "user", content: updatePrompt }];
+
+      // ✅ Append AI response confirming the update
       const aiResponse = {
         role: "ai",
         content: "Here is the updated schema. Are you satisfied?",
       };
 
-      // ✅ 4. Keep only the last two messages
+      // ✅ Keep only the last two messages
       setHistory([newHistory[0], aiResponse]);
 
+      // ✅ Clear the input field after successful update
       setUpdatePrompt("");
     } catch (error) {
-      alert("Error updating schema.");
+      console.error("Error updating schema:", error);
+      alert("Error updating schema. Please try again.");
     }
   };
 
@@ -115,7 +123,9 @@ function ProjectDetail() {
           {history.map((entry, index) => (
             <div
               key={index}
-              className={entry.role === "user" ? "user-bubble" : "ai-bubble"}
+              className={`chat-bubble ${
+                entry.role === "user" ? "user-bubble" : "ai-bubble"
+              }`}
             >
               <p>{entry.content}</p>
             </div>
