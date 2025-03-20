@@ -31,12 +31,12 @@
   font-weight: bold;
 }
 
-.hamburger-icon {
+.menu-icon {
   color: black;
   margin-left: 1140px;
 }
 
-.hamburger-icon:hover {
+.menu-icon:hover {
   cursor: pointer;
 }
 /* User Avatar */

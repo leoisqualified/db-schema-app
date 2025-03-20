@@ -1,4 +1,7 @@
 /* Schema Container (Row Layout with Wrapping) */
+.project-container {
+  overflow-y: hidden;
+}
 .schema-container {
   display: flex;
   flex-wrap: wrap;
@@ -8,11 +11,10 @@
   background: #fff;
   padding: 15px;
   border-radius: 10px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
   text-align: left;
   overflow-y: auto;
   max-height: 400px; /* Keeps it scrollable */
-  margin-bottom: 150px;
+  margin-bottom: 100px;
 }
 
 /* Smaller Schema Tables */
@@ -23,7 +25,7 @@
   background: #f9f9f9;
   padding: 10px;
   border-radius: 8px;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  /* box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1); */
 }
 
 /* Header Styling */
@@ -54,6 +56,26 @@
   background-color: #333;
   color: white;
   font-size: 12px;
+}
+
+/* Update Button */
+.update-button {
+  width: 50px;
+  height: 50px;
+  background-color: black;
+  border: none;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  font-size: 20px; /* Adjust icon size */
+  color: white; /* Default color */
+}
+
+/* Ensures the FontAwesome icon inside the button is white */
+.update-button svg {
+  color: white !important;
 }
 
 /* Responsive Adjustments */

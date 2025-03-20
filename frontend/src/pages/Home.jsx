@@ -3,7 +3,8 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import "./Home.css";
 import Navbar from "../components/Navbar";
-import { FaArrowUp } from "react-icons/fa";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faArrowUp } from "@fortawesome/free-solid-svg-icons"; // Import up arrow icon
 
 function HomePage() {
   const [prompt, setPrompt] = useState("");
@@ -52,7 +53,7 @@ function HomePage() {
             placeholder="Ask Anything"
           />
           <button onClick={handleSubmit} className="send-button">
-            <FaArrowUp color="white" />
+            <FontAwesomeIcon icon={faArrowUp} />
           </button>
         </div>
       </div>

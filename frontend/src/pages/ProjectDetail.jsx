@@ -2,6 +2,8 @@ import { useEffect, useState } from "react";
 import { useParams, useLocation } from "react-router-dom";
 import Navbar from "../components/Navbar";
 import axios from "axios";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faArrowUp } from "@fortawesome/free-solid-svg-icons";
 import "./ProjectDetail.css";
 
 function ProjectDetail() {
@@ -95,9 +97,11 @@ function ProjectDetail() {
           <textarea
             value={updatePrompt}
             onChange={(e) => setUpdatePrompt(e.target.value)}
-            placeholder="Enter an update prompt..."
+            placeholder="Say Anything"
           />
-          <button onClick={handleUpdate}>Update</button>
+          <button onClick={handleUpdate} className="update-button">
+            <FontAwesomeIcon icon={faArrowUp} />
+          </button>
         </div>
       </div>
     </>
