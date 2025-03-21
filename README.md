@@ -20,13 +20,60 @@ KeyMap is an AI-powered schema management tool that allows users to generate, mo
 
 ---
 
-## **Why NoSQL?** 🛢️
+## **Why SQL for Schema Generation?**
 
-We chose **MongoDB (NoSQL)** for schema storage due to:
+Our system generates **SQL schemas** instead of NoSQL for the following reasons:
 
-✅ **Flexible Structure** – Allows dynamic schema updates without migrations.  
-✅ **Scalability** – Can handle a growing number of schema modifications.  
-✅ **Ease of Use** – JSON-based storage aligns well with AI-generated schema formats.
+### **1. Structured and Well-Defined Data**
+
+SQL databases provide a **rigid schema structure**, which is beneficial for applications that require:
+
+- **Strict data integrity** (e.g., banking, healthcare).
+- **Relationships between entities** (e.g., Users and Orders).
+- **Consistent queries** with well-defined constraints.
+
+### **2. AI Consistency and Predictability**
+
+By generating **SQL schemas**, we ensure the AI:
+
+- Produces **predictable and structured** outputs.
+- Avoids issues like **inconsistent document structures** (which are common in NoSQL).
+- Returns **schemas that are universally understandable** and widely used.
+
+### **3. Data Integrity and Constraints**
+
+SQL supports **primary keys, foreign keys, unique constraints, and transactions**, ensuring:
+
+- **No duplicate or inconsistent data.**
+- **Enforceable relationships** between tables.
+- **Atomicity, Consistency, Isolation, and Durability (ACID)** compliance.
+
+### **4. Scalability and Optimization**
+
+Modern SQL databases (PostgreSQL, MySQL) provide:
+
+- **Indexing for fast queries.**
+- **Sharding and replication** for scalability.
+- **Advanced analytical queries** for reporting and insights.
+
+### **5. Widespread Adoption and Compatibility**
+
+SQL is a **standardized query language**, making it easier to:
+
+- **Integrate with various tools** (BI tools, ORMs, APIs).
+- **Migrate across databases** (PostgreSQL, MySQL, SQLite, etc.).
+- **Find developers and maintainability** due to its long history.
+
+---
+
+### **Why Not NoSQL?**
+
+While NoSQL databases (MongoDB, Firebase, etc.) offer **flexibility**, they lack:  
+❌ **Strong schema enforcement** → Can lead to inconsistent data.  
+❌ **Built-in relationships** → Requires extra logic to maintain references.  
+❌ **Standardized query language** → Different databases use different syntax.
+
+Thus, **SQL was the best choice for generating schemas where structure, integrity, and relationships matter.** 🚀
 
 ---
 
@@ -103,61 +150,6 @@ The database schema and project details are stored in MongoDB, using the followi
   ]
 }
 ```
-
-## **Why SQL for Schema Generation?**
-
-Our system generates **SQL schemas** instead of NoSQL for the following reasons:
-
-### **1. Structured and Well-Defined Data**
-
-SQL databases provide a **rigid schema structure**, which is beneficial for applications that require:
-
-- **Strict data integrity** (e.g., banking, healthcare).
-- **Relationships between entities** (e.g., Users and Orders).
-- **Consistent queries** with well-defined constraints.
-
-### **2. AI Consistency and Predictability**
-
-By generating **SQL schemas**, we ensure the AI:
-
-- Produces **predictable and structured** outputs.
-- Avoids issues like **inconsistent document structures** (which are common in NoSQL).
-- Returns **schemas that are universally understandable** and widely used.
-
-### **3. Data Integrity and Constraints**
-
-SQL supports **primary keys, foreign keys, unique constraints, and transactions**, ensuring:
-
-- **No duplicate or inconsistent data.**
-- **Enforceable relationships** between tables.
-- **Atomicity, Consistency, Isolation, and Durability (ACID)** compliance.
-
-### **4. Scalability and Optimization**
-
-Modern SQL databases (PostgreSQL, MySQL) provide:
-
-- **Indexing for fast queries.**
-- **Sharding and replication** for scalability.
-- **Advanced analytical queries** for reporting and insights.
-
-### **5. Widespread Adoption and Compatibility**
-
-SQL is a **standardized query language**, making it easier to:
-
-- **Integrate with various tools** (BI tools, ORMs, APIs).
-- **Migrate across databases** (PostgreSQL, MySQL, SQLite, etc.).
-- **Find developers and maintainability** due to its long history.
-
----
-
-### **Why Not NoSQL?**
-
-While NoSQL databases (MongoDB, Firebase, etc.) offer **flexibility**, they lack:  
-❌ **Strong schema enforcement** → Can lead to inconsistent data.  
-❌ **Built-in relationships** → Requires extra logic to maintain references.  
-❌ **Standardized query language** → Different databases use different syntax.
-
-Thus, **SQL was the best choice for generating schemas where structure, integrity, and relationships matter.** 🚀
 
 ## **Project Setup & Installation**
 
