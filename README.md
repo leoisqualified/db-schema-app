@@ -69,11 +69,11 @@ SQL is a **standardized query language**, making it easier to:
 ### **Why Not NoSQL?**
 
 While NoSQL databases (MongoDB, Firebase, etc.) offer **flexibility**, they lack:  
-❌ **Strong schema enforcement** → Can lead to inconsistent data.  
-❌ **Built-in relationships** → Requires extra logic to maintain references.  
-❌ **Standardized query language** → Different databases use different syntax.
+**Strong schema enforcement** → Can lead to inconsistent data.  
+**Built-in relationships** → Requires extra logic to maintain references.  
+**Standardized query language** → Different databases use different syntax.
 
-Thus, **SQL was the best choice for generating schemas where structure, integrity, and relationships matter.** 🚀
+Thus, **SQL was the best choice for generating schemas where structure, integrity, and relationships matter.**
 
 ---
 
