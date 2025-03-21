@@ -78,6 +78,23 @@
   text-overflow: ellipsis; /* Trims long text with "..." */
 }
 
+/* Change table header background to ash */
+.schema-table .table-title {
+  background-color: #b2b2b2; /* Ash color */
+  color: white; /* Ensure text is readable */
+  font-size: 12px;
+}
+
+/* Right-align the second column */
+.schema-table tbody td:nth-child(2) {
+  text-align: right;
+}
+
+/* Convert text in the table body to lowercase */
+.schema-table tbody td {
+  text-transform: lowercase;
+}
+
 .schema-table th {
   background-color: #333;
   color: white;
