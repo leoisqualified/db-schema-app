@@ -23,9 +23,10 @@
   text-align: left;
   overflow-y: auto;
   max-height: 600px; /* Keeps it scrollable */
-  width: 90vw; /* Makes it as wide as the viewport */
+  width: 80vw; /* Makes it as wide as the viewport */
   box-sizing: border-box;
   margin-top: -100px;
+  margin-left: 100px;
 }
 
 /* Hide Scrollbar (But Keep Scrolling Functional) */
@@ -63,11 +64,12 @@
   width: 100%;
   border-collapse: collapse;
   font-size: 12px;
+  border: 1px solid #ddd;
 }
 
 .schema-table th,
 .schema-table td {
-  border: 1px solid #ddd;
+  border: none;
   padding: 5px;
   text-align: left;
   color: black;
@@ -87,7 +89,7 @@
 .chat-history {
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 2px;
   width: 100%;
   max-width: 600px;
   margin: 20px auto;
@@ -99,23 +101,28 @@
   padding: 10px 15px;
   border-radius: 15px;
   font-size: 14px;
-  line-height: 1.4;
+  line-height: 1;
   word-wrap: break-word;
+  margin-bottom: 30px;
 }
 
 /* User Chat Bubble (Filled Grey) */
 .user-bubble {
-  align-self: flex-end;
+  align-self: center;
   background-color: #ccc;
   color: black;
+  height: fit-content;
+  width: fit-content;
+  padding-top: 5px;
+  padding-bottom: 5px;
 }
 
 /* AI Chat Bubble (Non-Filled) */
 .ai-bubble {
-  align-self: flex-start;
+  align-self: center;
   background-color: white;
-  border: 1px solid #ccc;
   color: black;
+  margin-top: -5px;
 }
 
 /* ✅ Hide Scrollbar While Keeping Scrolling Functional */
